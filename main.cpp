@@ -3,6 +3,7 @@
 # include "pointer.h"
 # include "cplusplus11.h"
 # include "multithread.h"
+# include "basicstructure.h"
 
 void testConstructor() {
 	A a;
