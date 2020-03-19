@@ -3,33 +3,25 @@
 #include <thread>
 #include <iostream>
 
+// https://blog.csdn.net/liuker888/article/details/46848905
+
+void show(const char* str, const int id) {
+	std::cout << str << id + 1 << std::endl;
+}
+
 class ThreadTask
 {
 public:
-	ThreadTask(int a, int b)
-		: a_(a), b_(b)
-	{  }
-
-	void operator()()
-	{
-		std::cout << "hello " << std::this_thread::get_id() << std::endl;
-		std::cout << "a + b = " << a_ + b_ << std::endl;
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		std::cout << "world " << std::this_thread::get_id() << std::endl;
+	void test() {
+		std::thread t1(show, "t1 thread: ", 0);
+		t1.join();
+		std::thread t2(show, "t2 thread: ", 1);
+		t2.detach();
+		auto func = [](const char* str) {std::cout << str << std::endl; };
+		std::thread t3(func, "lamda thread t3");
+		t3.join();
 	}
-
-private:
-	int a_;
-	int b_;
 };
-
-void func(int a)
-{
-	std::cout << "hello " << std::this_thread::get_id() << std::endl;
-	std::cout << a << std::endl;
-	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::cout << "world " << std::this_thread::get_id() << std::endl;
-}
 
 #endif
 

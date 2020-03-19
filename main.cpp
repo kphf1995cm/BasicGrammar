@@ -21,18 +21,8 @@ void testC11Feature() {
 }
 
 void testThread() {
-	std::thread t1(func, 1);
-	std::thread t2([]() {
-		std::cout << "hello " << std::this_thread::get_id() << std::endl;
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		std::cout << "world " << std::this_thread::get_id() << std::endl;
-	});
-	ThreadTask task(1, 2);
-	std::thread t3(task);
-
-	t1.join();
-	t2.join();
-	t3.join();
+	ThreadTask task;
+	task.test();
 }
 
 int main() {
