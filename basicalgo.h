@@ -24,6 +24,37 @@ class Sort {
 			quicksort(nums, mid + 1, j);
 		}
 	}
+
+	void ksort(std::vector<int>& vals) {
+		if (vals.size() > 0) {
+			for (int i = 0; i < vals.size(); i++) {
+				int k = i, j;
+				for (j = i + 1; j < vals.size(); j++) {
+					if (vals[j] < vals[k])
+						k = j;
+				}
+				if (k != i) {
+					int temp = vals[k];
+					vals[k] = vals[i];
+					vals[i] = temp;
+				}
+			}
+		}
+	}
+
+	void pipesort(std::vector<int>& vals) {
+		if (vals.size()>0) {
+			for (int i = vals.size() - 1; i >= 0; i--) {
+				for (int j = 0; j < i; j++) {
+					if (vals[j] > vals[j + 1]) {
+						int temp = vals[j + 1];
+						vals[j + 1] = vals[j];
+						vals[j] = temp;
+					}
+				}
+			}
+		}
+	}
 };
 
 #endif
